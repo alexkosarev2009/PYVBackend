@@ -1,2 +1,2 @@
-user_id;title;lat;lng;image_url;audio_url
+author_id;title;lat;lng;image_url;audio_url
 1;Москва;55.7;37.6;default/https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcT2WNOKipos1675WwTh_Wh4dZTuZ8IlFOWTmiehKTf5uPI5kUfaJhTXeBlvUfIh4KLjyX3BXlHbF66386px5DhRKUBj&s=19;default/audio.mp3

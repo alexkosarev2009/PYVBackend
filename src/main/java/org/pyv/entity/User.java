@@ -1,4 +1,4 @@
-package org.example.entity;
+package org.pyv.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -25,6 +25,6 @@ public class User {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
-    @OneToMany(mappedBy = "user", cascade = {})
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Marker> markers;
 }

@@ -1,4 +1,4 @@
-package org.example.entity;
+package org.pyv.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -12,8 +12,8 @@ public class Marker {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "author_id", nullable = false)
+    private User author;
 
     @Column(name = "title")
     private String title;

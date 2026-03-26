@@ -8,7 +8,7 @@
     <changeSet id="2026-25-03-0001-user" author="akosarev">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="users"/>
+                <tableExists tableName="user"/>
             </not>
         </preConditions>
         <createTable tableName="user">

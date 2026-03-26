@@ -5,9 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     
-    <include file="db.changelog/1.0/2026-25-03-0001-user.xml"/>
+    <include file="/db.changelog/1.0/2026-25-03-0001-person.xml"/>
     <include file="db.changelog/1.0/2026-25-03-0002-marker.xml"/>
-    <include file="db.changelog/data/2026-25-03-0001-user-data.xml"/>
+    <include file="/db.changelog/data/2026-25-03-0001-person-data.xml"/>
     <include file="db.changelog/data/2026-25-03-0002-marker-data.xml"/>
 
 

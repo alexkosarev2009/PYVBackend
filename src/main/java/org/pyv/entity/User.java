@@ -1,5 +1,6 @@
 package org.pyv.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "person")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +26,4 @@ public class User {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<Marker> markers;
 }

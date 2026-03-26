@@ -26,11 +26,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUserByName(String name) {
-        return null;
-    }
-
-    @Override
     public UserDTO getUserByUsername(String username) {
         return null;
     }

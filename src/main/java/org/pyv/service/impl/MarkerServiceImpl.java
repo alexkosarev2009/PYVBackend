@@ -38,7 +38,7 @@ public class MarkerServiceImpl implements MarkerService {
 
     @Override
     public MarkerDTO createMarker(MarkerDTO dto) {
-        User user = userRepository.findUserByUsername(dto.getAuthorUsername())
+        User user = userRepository.findByUsername(dto.getAuthorUsername())
                 .orElseThrow(() -> new UserNotFoundException("Marker has no author!"));
         Marker marker = new Marker();
         marker.setTitle(dto.getTitle());

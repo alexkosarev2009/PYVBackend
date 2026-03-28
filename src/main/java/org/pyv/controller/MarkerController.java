@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/marker")
+@RequestMapping("api/markers")
 @RequiredArgsConstructor
 public class MarkerController {
     private final MarkerService markerService;
@@ -25,7 +25,7 @@ public class MarkerController {
         return ResponseEntity.ok(markerService.getMarkerById(id));
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<MarkerDTO> createMarker(@RequestBody MarkerDTO markerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(markerService.createMarker(markerDTO));

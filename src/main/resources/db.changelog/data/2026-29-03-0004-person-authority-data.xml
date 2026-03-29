@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="2026-25-03-0001-person-data" author="akosarev">
-        <loadData tableName="person" file="db.changelog/data/csv/2026-25-03-0001-person-data.csv"
+    <changeSet id="2026-29-03-0004-person-authority-data" author="akosarev">
+        <loadData tableName="person_authority" file="db.changelog/data/csv/2026-29-03-0004-person-authority-data.csv"
                   separator=";"
                   quotchar='"'
                   encoding="UTF-8"

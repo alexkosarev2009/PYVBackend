@@ -1,5 +1,6 @@
 package org.pyv.exception.handler;
 
+import org.pyv.exception.AuthorityNotFoundException;
 import org.pyv.exception.MarkerNotFoundException;
 import org.pyv.exception.UserNotFoundException;
 import org.pyv.exception.UsernameAlreadyExistsException;
@@ -38,6 +39,16 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(
                 new ErrorResponse(
                         HttpStatus.CONFLICT.value(),
+                        e.getMessage(),
+                        System.currentTimeMillis()
+                )
+        );
+    }
+    @ExceptionHandler(AuthorityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAuthorityNotFoundException(AuthorityNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new ErrorResponse(
+                        HttpStatus.NOT_FOUND.value(),
                         e.getMessage(),
                         System.currentTimeMillis()
                 )

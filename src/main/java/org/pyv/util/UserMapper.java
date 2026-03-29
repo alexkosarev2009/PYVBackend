@@ -13,6 +13,7 @@ public class UserMapper {
         userDTO.setUsername(user.getUsername());
         userDTO.setBio(user.getBio());
         userDTO.setAvatarUrl(user.getAvatarUrl());
+        userDTO.setEmail(user.getEmail());
         return userDTO;
     }
 }

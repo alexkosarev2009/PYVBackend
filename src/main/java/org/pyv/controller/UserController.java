@@ -2,9 +2,11 @@ package org.pyv.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.pyv.dto.UserDTO;
+import org.pyv.dto.UserRegisterDTO;
 import org.pyv.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,8 +32,13 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByUsername(username));
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<UserDTO> login(Authentication authentication) {
+        return ResponseEntity.ok(userService.getUserByUsername(authentication.getName()));
+    }
+
     @PostMapping
-    public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> register(@RequestBody UserRegisterDTO userDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDTO));
     }
 

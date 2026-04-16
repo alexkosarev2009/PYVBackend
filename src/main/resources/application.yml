@@ -16,3 +16,8 @@ spring:
       ddl-auto: none
     generate-ddl: false
     show-sql: true
+
+s3:
+  endpoint: https://storage.yandexcloud.net
+  region: ru-central1
+  bucket: pin-your-voice

@@ -32,9 +32,10 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/test-s3").permitAll()
+                        .requestMatchers("/api/s3/presign").permitAll()
                         .requestMatchers("/h2-console").permitAll()
                         .requestMatchers("api/markers").permitAll()
+                        .requestMatchers(HttpMethod.POST, "api/markers/create").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/users").permitAll()
                         .requestMatchers("api/users/by-username").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "api/users").hasAuthority("ROLE_ADMIN")

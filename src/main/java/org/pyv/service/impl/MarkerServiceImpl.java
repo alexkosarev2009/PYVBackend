@@ -11,6 +11,7 @@ import org.pyv.repository.MarkerRepository;
 import org.pyv.repository.UserRepository;
 import org.pyv.service.MarkerService;
 import org.pyv.util.MarkerMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,6 @@ import java.util.stream.Collectors;
 public class MarkerServiceImpl implements MarkerService {
     private final MarkerRepository markerRepository;
     private final UserRepository userRepository;
-
 
     @Override
     public List<MarkerDTO> getAllMarkers() {
@@ -39,7 +39,7 @@ public class MarkerServiceImpl implements MarkerService {
 
     @Override
     public MarkerDTO createMarker(CreateMarkerDTO dto) {
-        User user = userRepository.findById(dto.getId())
+        User user = userRepository.findById(dto.getAuthorId())
                 .orElseThrow(() -> new UserNotFoundException("Marker has no author!"));
         Marker marker = new Marker();
         marker.setTitle(dto.getTitle());

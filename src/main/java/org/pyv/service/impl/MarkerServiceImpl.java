@@ -1,6 +1,7 @@
 package org.pyv.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.pyv.dto.CreateMarkerDTO;
 import org.pyv.dto.MarkerDTO;
 import org.pyv.entity.Marker;
 import org.pyv.entity.User;
@@ -37,8 +38,8 @@ public class MarkerServiceImpl implements MarkerService {
     }
 
     @Override
-    public MarkerDTO createMarker(MarkerDTO dto) {
-        User user = userRepository.findByUsername(dto.getAuthorUsername())
+    public MarkerDTO createMarker(CreateMarkerDTO dto) {
+        User user = userRepository.findById(dto.getId())
                 .orElseThrow(() -> new UserNotFoundException("Marker has no author!"));
         Marker marker = new Marker();
         marker.setTitle(dto.getTitle());

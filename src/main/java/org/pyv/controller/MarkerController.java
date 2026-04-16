@@ -1,6 +1,7 @@
 package org.pyv.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.pyv.dto.CreateMarkerDTO;
 import org.pyv.dto.MarkerDTO;
 import org.pyv.service.MarkerService;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class MarkerController {
     }
 
     @PostMapping
-    public ResponseEntity<MarkerDTO> createMarker(@RequestBody MarkerDTO markerDTO) {
+    public ResponseEntity<MarkerDTO> createMarker(@RequestBody CreateMarkerDTO markerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(markerService.createMarker(markerDTO));
     }

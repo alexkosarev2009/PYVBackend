@@ -21,3 +21,6 @@ s3:
   endpoint: https://storage.yandexcloud.net
   region: ru-central1
   bucket: pin-your-voice
+
+jwt:
+  secret: tk3EASATqPX1mxbMrOsoN4iAnZZl0pVQVeBtzG8t5tg=

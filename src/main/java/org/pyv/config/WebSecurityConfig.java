@@ -1,5 +1,6 @@
 package org.pyv.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,13 +10,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig {
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -28,23 +34,39 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/s3/presign").permitAll()
-                        .requestMatchers("/h2-console").permitAll()
-                        .requestMatchers("api/markers").permitAll()
-                        .requestMatchers(HttpMethod.POST, "api/markers/create").permitAll()
-                        .requestMatchers(HttpMethod.POST, "api/users").permitAll()
-                        .requestMatchers("api/users/by-username").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "api/users").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("api/users").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(httpBase -> {})
-                .headers(headers ->
-                        headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
-        return httpSecurity.build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(session ->
+                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/api/auth/login").permitAll()
+
+                    .requestMatchers("/api/s3/presign").permitAll()
+                    .requestMatchers("/h2-console/**").permitAll()
+
+                    .requestMatchers(HttpMethod.POST, "/api/markers/create").permitAll()
+                    .requestMatchers("/api/markers").permitAll()
+
+                    .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                    .requestMatchers("/api/users/by-username").permitAll()
+
+                    .requestMatchers(HttpMethod.DELETE, "/api/users")
+                    .hasAuthority("ROLE_ADMIN")
+
+                    .requestMatchers("/api/users")
+                    .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+
+                    .anyRequest().authenticated()
+            )
+            .addFilterBefore(jwtAuthenticationFilter,
+                    UsernamePasswordAuthenticationFilter.class
+            )
+            .headers(headers ->
+                    headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+            );
+
+        return http.build();
     }
 }

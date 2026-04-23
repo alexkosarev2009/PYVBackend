@@ -38,6 +38,13 @@ public class MarkerServiceImpl implements MarkerService {
     }
 
     @Override
+    public List<MarkerDTO> getAllMarkersByAuthorId(Long authorId) {
+        return markerRepository.findAllByAuthor_Id(authorId)
+                .stream().map(MarkerMapper::markerToDTO)
+                .toList();
+    }
+
+    @Override
     public MarkerDTO createMarker(CreateMarkerDTO dto, User user) {
         Marker marker = new Marker();
         marker.setTitle(dto.getTitle());

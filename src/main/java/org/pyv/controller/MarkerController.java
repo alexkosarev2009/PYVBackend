@@ -31,6 +31,11 @@ public class MarkerController {
         return ResponseEntity.ok(markerService.getMarkerById(id));
     }
 
+    @GetMapping("by-author-id")
+    public ResponseEntity<List<MarkerDTO>> getAllMarkersByAuthorId(@RequestParam Long authorId) {
+        return ResponseEntity.ok(markerService.getAllMarkersByAuthorId(authorId));
+    }
+
     @PostMapping
     public ResponseEntity<MarkerDTO> createMarker(@RequestBody CreateMarkerDTO markerDTO,
                                                   @AuthenticationPrincipal User user) {

@@ -42,19 +42,11 @@ public class WebSecurityConfig {
             )
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/login").permitAll()
-
-                    .requestMatchers("/api/s3/presign").permitAll()
                     .requestMatchers("/h2-console/**").permitAll()
-
-                    .requestMatchers("/api/markers").permitAll()
-
                     .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
 
                     .requestMatchers(HttpMethod.DELETE, "/api/users")
                     .hasAuthority("ROLE_ADMIN")
-
-                    .requestMatchers("/api/users/me")
-                    .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
                     .anyRequest().hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
             )

@@ -3,9 +3,11 @@ package org.pyv.controller;
 import lombok.RequiredArgsConstructor;
 import org.pyv.dto.CreateMarkerDTO;
 import org.pyv.dto.MarkerDTO;
+import org.pyv.entity.User;
 import org.pyv.service.MarkerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +29,10 @@ public class MarkerController {
     }
 
     @PostMapping
-    public ResponseEntity<MarkerDTO> createMarker(@RequestBody CreateMarkerDTO markerDTO) {
+    public ResponseEntity<MarkerDTO> createMarker(@RequestBody CreateMarkerDTO markerDTO,
+                                                  @AuthenticationPrincipal User user) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(markerService.createMarker(markerDTO));
+                .body(markerService.createMarker(markerDTO, user));
     }
     @PutMapping("/{id}")
     public ResponseEntity<MarkerDTO> updateMarker(@PathVariable Long id, @RequestBody MarkerDTO markerDTO) {

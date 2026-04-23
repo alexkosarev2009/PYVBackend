@@ -9,5 +9,4 @@ public class CreateMarkerDTO {
     private double lng;
     private String imageUrl;
     private String audioUrl;
-    private long authorId;
 }

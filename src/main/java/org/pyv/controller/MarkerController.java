@@ -5,6 +5,8 @@ import org.pyv.dto.CreateMarkerDTO;
 import org.pyv.dto.MarkerDTO;
 import org.pyv.entity.User;
 import org.pyv.service.MarkerService;
+import org.pyv.service.UserService;
+import org.pyv.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MarkerController {
     private final MarkerService markerService;
+    private final UserServiceImpl userService;
 
     @GetMapping
     public ResponseEntity<List<MarkerDTO>> getAllMarkers() {
@@ -32,7 +35,7 @@ public class MarkerController {
     public ResponseEntity<MarkerDTO> createMarker(@RequestBody CreateMarkerDTO markerDTO,
                                                   @AuthenticationPrincipal User user) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(markerService.createMarker(markerDTO, user));
+                .body(markerService.createMarker(markerDTO, userService.getCurrentUser(user)));
     }
     @PutMapping("/{id}")
     public ResponseEntity<MarkerDTO> updateMarker(@PathVariable Long id, @RequestBody MarkerDTO markerDTO) {

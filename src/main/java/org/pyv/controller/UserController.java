@@ -3,10 +3,13 @@ package org.pyv.controller;
 import lombok.RequiredArgsConstructor;
 import org.pyv.dto.UserDTO;
 import org.pyv.dto.UserRegisterDTO;
+import org.pyv.entity.User;
 import org.pyv.service.impl.UserServiceImpl;
+import org.pyv.util.UserMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +33,11 @@ public class UserController {
     @GetMapping("/by-username")
     public ResponseEntity<UserDTO> getUserByUsername(@RequestParam String username) {
         return ResponseEntity.ok(userService.getUserByUsername(username));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserDTO> getMe(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(UserMapper.userToDTO(userService.getCurrentUser(user)));
     }
 
     @GetMapping("/login")

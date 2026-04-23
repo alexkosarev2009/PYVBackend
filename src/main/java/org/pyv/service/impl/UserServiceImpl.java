@@ -39,6 +39,13 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
     }
 
+    public User getCurrentUser(User user) {
+        User actualUser = userRepository.findById(user.getId())
+                .orElseThrow();
+
+        return actualUser;
+    }
+
     @Override
     public UserDTO getUserByUsername(String username) {
         return userRepository.findByUsername(username)

@@ -46,19 +46,17 @@ public class WebSecurityConfig {
                     .requestMatchers("/api/s3/presign").permitAll()
                     .requestMatchers("/h2-console/**").permitAll()
 
-                    .requestMatchers(HttpMethod.POST, "/api/markers/create").permitAll()
                     .requestMatchers("/api/markers").permitAll()
 
                     .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
-                    .requestMatchers("/api/users/by-username").permitAll()
 
                     .requestMatchers(HttpMethod.DELETE, "/api/users")
                     .hasAuthority("ROLE_ADMIN")
 
-                    .requestMatchers("/api/users")
+                    .requestMatchers("/api/users/me")
                     .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
-                    .anyRequest().authenticated()
+                    .anyRequest().hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
             )
             .addFilterBefore(jwtAuthenticationFilter,
                     UsernamePasswordAuthenticationFilter.class

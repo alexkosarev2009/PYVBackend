@@ -2,6 +2,8 @@ package org.pyv.dto;
 
 import lombok.Data;
 
+import java.time.Instant;
+
 @Data
 public class MarkerDTO {
     private long id;
@@ -13,4 +15,5 @@ public class MarkerDTO {
     private String authorName;
     private String authorUsername;
     private String authorAvatarUrl;
+    private Instant createdAt;
 }

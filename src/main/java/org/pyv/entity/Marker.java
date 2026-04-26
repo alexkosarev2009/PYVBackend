@@ -2,6 +2,9 @@ package org.pyv.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.Instant;
 
 @Data
 @Entity
@@ -29,4 +32,7 @@ public class Marker {
 
     @Column(name = "audio_url")
     private String audioUrl;
+
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private Instant createdAt;
 }

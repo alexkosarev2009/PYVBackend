@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 
@@ -34,6 +35,8 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private Instant createdAt;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

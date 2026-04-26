@@ -2,6 +2,8 @@ package org.pyv.dto;
 
 import lombok.Data;
 
+import java.time.Instant;
+
 @Data
 public class UserDTO {
     private long id;
@@ -10,4 +12,5 @@ public class UserDTO {
     private String username;
     private String bio;
     private String avatarUrl;
+    private Instant createdAt;
 }

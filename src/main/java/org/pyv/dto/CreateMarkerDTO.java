@@ -1,6 +1,8 @@
 package org.pyv.dto;
 import lombok.Data;
 
+import java.time.Instant;
+
 @Data
 public class CreateMarkerDTO {
     private long id;

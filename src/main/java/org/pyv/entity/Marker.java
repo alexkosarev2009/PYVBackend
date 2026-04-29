@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @Entity
@@ -34,5 +35,8 @@ public class Marker {
     private String audioUrl;
 
     @Column(name = "created_at", insertable = false, updatable = false)
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
+
+    @Column(name = "amplitudes")
+    private List<Integer> amplitudes;
 }

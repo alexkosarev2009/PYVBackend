@@ -36,7 +36,7 @@
             <column name="audio_url" type="varchar">
                 <constraints nullable="false"/>
             </column>
-            <column name="amplitudes" type="integer[]">
+            <column name="amplitudes" type="varchar">
                 <constraints nullable="false"/>
             </column>
             <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>

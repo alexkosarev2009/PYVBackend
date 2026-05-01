@@ -38,5 +38,6 @@ public class Marker {
     private Instant createdAt = Instant.now();
 
     @Column(name = "amplitudes")
-    private List<Integer> amplitudes;
+    private String amplitudes;
+
 }

@@ -16,4 +16,5 @@ public class MarkerDTO {
     private String authorUsername;
     private String authorAvatarUrl;
     private Instant createdAt;
+    private String amplitudes;
 }

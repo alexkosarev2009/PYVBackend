@@ -14,7 +14,6 @@ import org.pyv.util.MarkerMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +53,7 @@ public class MarkerServiceImpl implements MarkerService {
         marker.setImageUrl(dto.getImageUrl());
         marker.setAudioUrl(dto.getAudioUrl());
         marker.setAuthor(user);
+        marker.setAmplitudes(dto.getAmplitudes());
         return MarkerMapper.markerToDTO(markerRepository.save(marker));
     }
 
@@ -64,6 +64,7 @@ public class MarkerServiceImpl implements MarkerService {
         marker.setTitle(dto.getTitle());
         marker.setImageUrl(dto.getImageUrl());
         marker.setAudioUrl(dto.getAudioUrl());
+        marker.setAmplitudes(dto.getAmplitudes());
 
         return MarkerMapper.markerToDTO(markerRepository.save(marker));
     }

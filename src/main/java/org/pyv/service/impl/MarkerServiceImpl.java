@@ -6,12 +6,10 @@ import org.pyv.dto.MarkerDTO;
 import org.pyv.entity.Marker;
 import org.pyv.entity.User;
 import org.pyv.exception.MarkerNotFoundException;
-import org.pyv.exception.UserNotFoundException;
 import org.pyv.repository.MarkerRepository;
 import org.pyv.repository.UserRepository;
 import org.pyv.service.MarkerService;
 import org.pyv.util.MarkerMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +19,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MarkerServiceImpl implements MarkerService {
     private final MarkerRepository markerRepository;
-    private final UserRepository userRepository;
 
     @Override
     public List<MarkerDTO> getAllMarkers() {

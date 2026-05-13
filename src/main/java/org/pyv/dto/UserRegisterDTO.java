@@ -8,6 +8,6 @@ public class UserRegisterDTO {
     private String username;
     private String email;
     private String password;
-    private String bio;
-    private String avatarUrl;
+    private String bio = "Empty bio";
+    private String avatarUrl = "https://storage.yandexcloud.net/pin-your-voice/images/default_avatar.jpg";
 }

@@ -28,6 +28,13 @@ public class MarkerServiceImpl implements MarkerService {
     }
 
     @Override
+    public List<MarkerDTO> getPublicMarkers(Long authorId) {
+        return markerRepository.findByAuthor_IdNotOrderByCreatedAtDesc(authorId).stream()
+                .map(MarkerMapper::markerToDTO)
+                .toList();
+    }
+
+    @Override
     public MarkerDTO getMarkerById(Long id) {
         return markerRepository.findById(id)
                 .map(MarkerMapper::markerToDTO)
@@ -51,6 +58,7 @@ public class MarkerServiceImpl implements MarkerService {
         marker.setAudioUrl(dto.getAudioUrl());
         marker.setAuthor(user);
         marker.setAmplitudes(dto.getAmplitudes());
+        marker.setIcon(dto.getIcon());
         return MarkerMapper.markerToDTO(markerRepository.save(marker));
     }
 
@@ -62,6 +70,7 @@ public class MarkerServiceImpl implements MarkerService {
         marker.setImageUrl(dto.getImageUrl());
         marker.setAudioUrl(dto.getAudioUrl());
         marker.setAmplitudes(dto.getAmplitudes());
+        marker.setIcon(dto.getIcon());
 
         return MarkerMapper.markerToDTO(markerRepository.save(marker));
     }

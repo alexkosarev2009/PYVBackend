@@ -40,4 +40,7 @@ public class Marker {
     @Column(name = "amplitudes")
     private String amplitudes;
 
+    @Column(name = "icon")
+    private int icon;
+
 }

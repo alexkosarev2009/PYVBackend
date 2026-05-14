@@ -19,6 +19,7 @@ public class MarkerMapper {
         markerDTO.setAuthorAvatarUrl(marker.getAuthor().getAvatarUrl());
         markerDTO.setCreatedAt(marker.getCreatedAt());
         markerDTO.setAmplitudes(marker.getAmplitudes());
+        markerDTO.setIcon(marker.getIcon());
         return markerDTO;
     }
 }

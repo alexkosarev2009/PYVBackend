@@ -42,6 +42,11 @@ public class MarkerController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(markerService.createMarker(markerDTO, userService.getCurrentUser(user)));
     }
+    @GetMapping("/public")
+    public ResponseEntity<List<MarkerDTO>> getPublicMarkers(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(markerService.getPublicMarkers(userService.getCurrentUser(user).getId()));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<MarkerDTO> updateMarker(@PathVariable Long id, @RequestBody MarkerDTO markerDTO) {
         return ResponseEntity.ok(markerService.updateMarker(id, markerDTO));

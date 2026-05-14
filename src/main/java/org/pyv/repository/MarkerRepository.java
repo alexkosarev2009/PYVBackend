@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface MarkerRepository extends JpaRepository<Marker, Long> {
     List<Marker> findAllByAuthor_Id(Long authorId);
+    List<Marker> findByAuthor_IdNotOrderByCreatedAtDesc(Long authorId);
+
 }

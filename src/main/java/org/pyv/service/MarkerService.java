@@ -9,6 +9,7 @@ import java.util.List;
 public interface MarkerService {
     List<MarkerDTO> getAllMarkers();
     List<MarkerDTO> getAllMarkersByAuthorId(Long authorId);
+    List<MarkerDTO> getPublicMarkers(Long authorId);
     MarkerDTO getMarkerById(Long id);
     MarkerDTO createMarker(CreateMarkerDTO dto, User user);
     MarkerDTO updateMarker(Long id, MarkerDTO dto);

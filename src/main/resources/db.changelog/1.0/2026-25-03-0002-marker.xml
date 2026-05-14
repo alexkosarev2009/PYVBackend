@@ -39,6 +39,9 @@
             <column name="amplitudes" type="varchar">
                 <constraints nullable="false"/>
             </column>
+            <column name="icon" type="INT" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
             <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
     </changeSet>

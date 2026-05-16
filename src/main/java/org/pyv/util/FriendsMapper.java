@@ -10,8 +10,8 @@ public class FriendsMapper {
         FriendsRequestsDTO dto = new FriendsRequestsDTO();
         dto.setId(friendsRequests.getId());
         dto.setStatus(friendsRequests.getStatus());
-        dto.setSender_id(friendsRequests.getSender().getId());
-        dto.setReceiver_id(friendsRequests.getReceiver().getId());
+        dto.setSenderId(friendsRequests.getSender().getId());
+        dto.setReceiverId(friendsRequests.getReceiver().getId());
         dto.setCreatedAt(friendsRequests.getCreatedAt());
         return dto;
     }

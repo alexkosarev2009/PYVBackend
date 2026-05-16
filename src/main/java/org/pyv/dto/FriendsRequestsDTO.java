@@ -8,8 +8,8 @@ import java.time.Instant;
 @Data
 public class FriendsRequestsDTO {
     private long id;
-    private long sender_id;
-    private long receiver_id;
+    private long senderId;
+    private long receiverId;
     private FriendsRequestsStatus status;
     private Instant createdAt;
 }

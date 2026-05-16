@@ -40,18 +40,18 @@ public class FriendsServiceImpl implements FriendsService {
     }
 
     @Override
-    public List<UserDTO> findAllFriends(User user) {
+    public List<UserDTO> findAllFriends(Long userId) {
         ArrayList<UserDTO> friends = new ArrayList<>();
 
         List<FriendsRequests> received = friendsRepository.findAllByReceiver_IdAndStatus(
-                user.getId(), FriendsRequestsStatus.ACCEPTED
+                userId, FriendsRequestsStatus.ACCEPTED
         );
         for (FriendsRequests request: received) {
             friends.add(UserMapper.userToDTO(request.getSender()));
         }
 
         List<FriendsRequests> sent = friendsRepository.findAllBySender_IdAndStatus(
-                user.getId(), FriendsRequestsStatus.ACCEPTED
+                userId, FriendsRequestsStatus.ACCEPTED
         );
         for (FriendsRequests request: sent) {
             friends.add(UserMapper.userToDTO(request.getReceiver()));

@@ -17,7 +17,7 @@ public interface FriendsService {
             Long senderId,
             FriendsRequestsStatus status
     );
-    List<UserDTO> findAllFriends(User user);
+    List<UserDTO> findAllFriends(Long user_Id);
     boolean existsBySender_IdAndReceiver_Id(
             Long senderId,
             Long receiverId

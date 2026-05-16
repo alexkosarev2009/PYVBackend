@@ -19,6 +19,11 @@ import java.util.List;
 public class FriendsController {
     private final FriendsService friendsService;
 
+    @GetMapping("/invitations")
+    public ResponseEntity<List<FriendsRequestsDTO>> getMyInvitations(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(friendsService.findByReceiver_IdAndStatus(user.getId(), FriendsRequestsStatus.PENDING));
+    }
+
     @GetMapping("/invitations/{receiver_Id}")
     public ResponseEntity<List<FriendsRequestsDTO>> getInvitationsByReceiverId(@PathVariable Long receiver_Id) {
         return ResponseEntity.ok(friendsService.findByReceiver_IdAndStatus(receiver_Id, FriendsRequestsStatus.PENDING));
@@ -44,6 +49,11 @@ public class FriendsController {
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getMyFriends(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(friendsService.findAllFriends(user));
+        return ResponseEntity.ok(friendsService.findAllFriends(user.getId()));
+    }
+
+    @GetMapping("/{user_Id}")
+    public ResponseEntity<List<UserDTO>> getFriendsByUserId(@PathVariable Long user_Id) {
+        return ResponseEntity.ok(friendsService.findAllFriends(user_Id));
     }
 }

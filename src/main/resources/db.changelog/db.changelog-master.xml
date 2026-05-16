@@ -9,10 +9,13 @@
     <include file="db.changelog/1.0/2026-25-03-0002-marker.xml"/>
     <include file="db.changelog/1.0/2026-29-03-0003-authority.xml"/>
     <include file="db.changelog/1.0/2026-29-03-0004-person-authority.xml"/>
+    <include file="/db.changelog/1.0/2026-16-05-0005-friends_requests.xml"/>
 
     <include file="/db.changelog/data/2026-25-03-0001-person-data.xml"/>
     <include file="db.changelog/data/2026-25-03-0002-marker-data.xml"/>
     <include file="db.changelog/data/2026-29-03-0003-authority-data.xml"/>
     <include file="db.changelog/data/2026-29-03-0004-person-authority-data.xml"/>
+    <include file="/db.changelog/data/2026-16-05-friends_requests-data.xml"/>
+
 
 </databaseChangeLog>

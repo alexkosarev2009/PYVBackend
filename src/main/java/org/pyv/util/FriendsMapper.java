@@ -13,6 +13,11 @@ public class FriendsMapper {
         dto.setSenderId(friendsRequests.getSender().getId());
         dto.setReceiverId(friendsRequests.getReceiver().getId());
         dto.setCreatedAt(friendsRequests.getCreatedAt());
+        dto.setSenderName(friendsRequests.getSender().getName());
+        dto.setSenderUsername(friendsRequests.getSender().getUsername());
+        dto.setSenderAvatarUrl(friendsRequests.getSender().getAvatarUrl());
+
+
         return dto;
     }
 }

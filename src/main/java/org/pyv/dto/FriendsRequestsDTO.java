@@ -9,6 +9,9 @@ import java.time.Instant;
 public class FriendsRequestsDTO {
     private long id;
     private long senderId;
+    private String senderName;
+    private String senderUsername;
+    private String senderAvatarUrl;
     private long receiverId;
     private FriendsRequestsStatus status;
     private Instant createdAt;

@@ -32,4 +32,6 @@ public interface FriendsService {
     void acceptRequest(Long id);
 
     FriendsRequestsDTO invite(Long receiverId, User user);
+
+    void deleteFriend(Long receiverId, User user);
 }

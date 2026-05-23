@@ -24,5 +24,9 @@ public interface FriendsRepository extends JpaRepository<FriendsRequests, Long> 
             Long sender,
             Long receiverId
     );
+    void deleteByReceiver_IdAndSender_Id(
+            Long senderId,
+            Long receiverId
+    );
 
 }

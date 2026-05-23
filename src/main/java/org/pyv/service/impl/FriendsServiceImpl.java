@@ -1,5 +1,6 @@
 package org.pyv.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.pyv.dto.FriendsRequestsDTO;
 import org.pyv.dto.UserDTO;
@@ -112,4 +113,18 @@ public class FriendsServiceImpl implements FriendsService {
         return null;
     }
 
+    @Override
+    @Transactional
+    public void deleteFriend(Long receiverId, User user) {
+        if (friendsRepository.existsBySender_IdAndReceiver_Id(
+                user.getId(), receiverId
+        )) {
+            friendsRepository.deleteByReceiver_IdAndSender_Id(receiverId, user.getId());
+        }
+        else if (friendsRepository.existsBySender_IdAndReceiver_Id(
+                receiverId, user.getId()
+        )) {
+            friendsRepository.deleteByReceiver_IdAndSender_Id(user.getId(), receiverId);
+        }
+    }
 }

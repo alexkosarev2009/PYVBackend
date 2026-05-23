@@ -47,6 +47,13 @@ public class FriendsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(friendsService.invite(receiver_Id, user));
     }
 
+    @DeleteMapping("/delete/{receiver_Id}")
+    public ResponseEntity<Void> deleteFriend(@PathVariable Long receiver_Id,
+                                             @AuthenticationPrincipal User user) {
+        friendsService.deleteFriend(receiver_Id, user);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
     @GetMapping
     public ResponseEntity<List<UserDTO>> getMyFriends(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(friendsService.findAllFriends(user.getId()));

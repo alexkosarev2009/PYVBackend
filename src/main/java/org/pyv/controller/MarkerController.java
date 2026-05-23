@@ -42,6 +42,7 @@ public class MarkerController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(markerService.createMarker(markerDTO, userService.getCurrentUser(user)));
     }
+
     @GetMapping("/public")
     public ResponseEntity<List<MarkerDTO>> getPublicMarkers(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(markerService.getPublicMarkers(userService.getCurrentUser(user).getId()));
@@ -53,8 +54,9 @@ public class MarkerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMarker(@PathVariable Long id) {
-        markerService.deleteMarker(id);
+    public ResponseEntity<Void> deleteMarker(@PathVariable Long id,
+                                             @AuthenticationPrincipal User user) {
+        markerService.deleteMarker(id, user);
         return ResponseEntity.noContent().build();
     }
 }

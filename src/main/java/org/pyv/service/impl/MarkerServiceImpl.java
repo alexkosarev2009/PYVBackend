@@ -76,10 +76,9 @@ public class MarkerServiceImpl implements MarkerService {
     }
 
     @Override
-    public void deleteMarker(Long id) {
-        if (!markerRepository.existsById(id)) {
-            throw new MarkerNotFoundException("Marker not found!");
-        }
-        markerRepository.deleteById(id);
+    public void deleteMarker(Long id, User user) {
+        Marker marker = markerRepository.findByIdAndAuthor_Id(id, user.getId())
+                .orElseThrow(() -> new MarkerNotFoundException("Marker not found!"));
+        markerRepository.delete(marker);
     }
 }

@@ -13,5 +13,5 @@ public interface MarkerService {
     MarkerDTO getMarkerById(Long id);
     MarkerDTO createMarker(CreateMarkerDTO dto, User user);
     MarkerDTO updateMarker(Long id, MarkerDTO dto);
-    void deleteMarker(Long id);
+    void deleteMarker(Long id, User user);
 }

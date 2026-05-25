@@ -18,4 +18,5 @@ public class MarkerDTO {
     private Instant createdAt;
     private String amplitudes;
     private int icon;
+    private int visibility;
 }

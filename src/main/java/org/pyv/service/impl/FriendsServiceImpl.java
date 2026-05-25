@@ -26,7 +26,7 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     public List<FriendsRequestsDTO> findByReceiver_IdAndStatus(Long receiverId, FriendsRequestsStatus status) {
-        return friendsRepository.findAllByReceiver_IdAndStatus(receiverId, status)
+        return friendsRepository.findAllByReceiver_IdAndStatusOrderByCreatedAtDesc(receiverId, status)
                 .stream()
                 .map(FriendsMapper::friendRequestToDTO)
                 .toList();
@@ -34,7 +34,7 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     public List<FriendsRequestsDTO> findAllBySender_IdAndStatus(Long senderId, FriendsRequestsStatus status) {
-        return friendsRepository.findAllByReceiver_IdAndStatus(senderId, status)
+        return friendsRepository.findAllByReceiver_IdAndStatusOrderByCreatedAtDesc(senderId, status)
                 .stream()
                 .map(FriendsMapper::friendRequestToDTO)
                 .toList();
@@ -44,14 +44,14 @@ public class FriendsServiceImpl implements FriendsService {
     public List<UserDTO> findAllFriends(Long userId) {
         ArrayList<UserDTO> friends = new ArrayList<>();
 
-        List<FriendsRequests> received = friendsRepository.findAllByReceiver_IdAndStatus(
+        List<FriendsRequests> received = friendsRepository.findAllByReceiver_IdAndStatusOrderByCreatedAtDesc(
                 userId, FriendsRequestsStatus.ACCEPTED
         );
         for (FriendsRequests request: received) {
             friends.add(UserMapper.userToDTO(request.getSender()));
         }
 
-        List<FriendsRequests> sent = friendsRepository.findAllBySender_IdAndStatus(
+        List<FriendsRequests> sent = friendsRepository.findAllBySender_IdAndStatusOrderByCreatedAtDesc(
                 userId, FriendsRequestsStatus.ACCEPTED
         );
         for (FriendsRequests request: sent) {

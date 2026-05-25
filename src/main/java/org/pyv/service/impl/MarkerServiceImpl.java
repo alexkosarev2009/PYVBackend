@@ -7,7 +7,6 @@ import org.pyv.entity.Marker;
 import org.pyv.entity.User;
 import org.pyv.exception.MarkerNotFoundException;
 import org.pyv.repository.MarkerRepository;
-import org.pyv.repository.UserRepository;
 import org.pyv.service.MarkerService;
 import org.pyv.util.MarkerMapper;
 import org.springframework.stereotype.Service;
@@ -35,6 +34,13 @@ public class MarkerServiceImpl implements MarkerService {
     }
 
     @Override
+    public List<MarkerDTO> getAllAvailableMarkers(Long userId) {
+        return markerRepository.findAvailableMarkers(userId)
+                .stream().map(MarkerMapper::markerToDTO)
+                .toList();
+    }
+
+    @Override
     public MarkerDTO getMarkerById(Long id) {
         return markerRepository.findById(id)
                 .map(MarkerMapper::markerToDTO)
@@ -42,8 +48,8 @@ public class MarkerServiceImpl implements MarkerService {
     }
 
     @Override
-    public List<MarkerDTO> getAllMarkersByAuthorId(Long authorId) {
-        return markerRepository.findAllByAuthor_Id(authorId)
+    public List<MarkerDTO> getAllMarkersByAuthorId(Long authorId, Long userId) {
+        return markerRepository.findAllVisibleAuthorMarkers(authorId, userId )
                 .stream().map(MarkerMapper::markerToDTO)
                 .toList();
     }
@@ -59,6 +65,7 @@ public class MarkerServiceImpl implements MarkerService {
         marker.setAuthor(user);
         marker.setAmplitudes(dto.getAmplitudes());
         marker.setIcon(dto.getIcon());
+        marker.setVisibility(dto.getVisibility());
         return MarkerMapper.markerToDTO(markerRepository.save(marker));
     }
 

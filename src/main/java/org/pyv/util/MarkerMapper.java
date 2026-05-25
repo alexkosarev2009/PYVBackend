@@ -20,6 +20,7 @@ public class MarkerMapper {
         markerDTO.setCreatedAt(marker.getCreatedAt());
         markerDTO.setAmplitudes(marker.getAmplitudes());
         markerDTO.setIcon(marker.getIcon());
+        markerDTO.setVisibility(marker.getVisibility());
         return markerDTO;
     }
 }

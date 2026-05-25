@@ -43,4 +43,7 @@ public class Marker {
     @Column(name = "icon")
     private int icon;
 
+    @Column(name = "visibility")
+    private int visibility;
+
 }

@@ -32,8 +32,9 @@ public class MarkerController {
     }
 
     @GetMapping("by-author-id")
-    public ResponseEntity<List<MarkerDTO>> getAllMarkersByAuthorId(@RequestParam Long authorId) {
-        return ResponseEntity.ok(markerService.getAllMarkersByAuthorId(authorId));
+    public ResponseEntity<List<MarkerDTO>> getAllMarkersByAuthorId(@RequestParam Long authorId,
+                                                                   @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(markerService.getAllMarkersByAuthorId(authorId, user.getId()));
     }
 
     @PostMapping
@@ -46,6 +47,11 @@ public class MarkerController {
     @GetMapping("/public")
     public ResponseEntity<List<MarkerDTO>> getPublicMarkers(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(markerService.getPublicMarkers(userService.getCurrentUser(user).getId()));
+    }
+
+    @GetMapping("/available")
+    public ResponseEntity<List<MarkerDTO>> getAvailableMarkers(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(markerService.getAllAvailableMarkers(user.getId()));
     }
 
     @PutMapping("/{id}")

@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FriendsRepository extends JpaRepository<FriendsRequests, Long> {
-    List<FriendsRequests> findAllByReceiver_IdAndStatus(
+    List<FriendsRequests> findAllByReceiver_IdAndStatusOrderByCreatedAtDesc(
             Long receiverId,
             FriendsRequestsStatus status
     );
-    List<FriendsRequests> findAllBySender_IdAndStatus(
+    List<FriendsRequests> findAllBySender_IdAndStatusOrderByCreatedAtDesc(
             Long senderId,
             FriendsRequestsStatus status
     );

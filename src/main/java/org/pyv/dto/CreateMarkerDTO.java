@@ -13,4 +13,5 @@ public class CreateMarkerDTO {
     private String audioUrl;
     private String amplitudes;
     private int icon;
+    private int visibility;
 }

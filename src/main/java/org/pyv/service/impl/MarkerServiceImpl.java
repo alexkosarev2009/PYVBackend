@@ -88,4 +88,11 @@ public class MarkerServiceImpl implements MarkerService {
                 .orElseThrow(() -> new MarkerNotFoundException("Marker not found!"));
         markerRepository.delete(marker);
     }
+
+    @Override
+    public List<MarkerDTO> searchMarkersByTitle(Long userId, String query) {
+        return markerRepository.searchVisibleMarkers(userId, query).stream()
+                .map(MarkerMapper::markerToDTO)
+                .toList();
+    }
 }

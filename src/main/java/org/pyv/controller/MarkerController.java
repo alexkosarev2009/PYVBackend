@@ -37,6 +37,12 @@ public class MarkerController {
         return ResponseEntity.ok(markerService.getAllMarkersByAuthorId(authorId, user.getId()));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<MarkerDTO>> searchMarkersByTitle(@RequestParam String query,
+                                                                @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(markerService.searchMarkersByTitle(user.getId(), query));
+    }
+
     @PostMapping
     public ResponseEntity<MarkerDTO> createMarker(@RequestBody CreateMarkerDTO markerDTO,
                                                   @AuthenticationPrincipal User user) {

@@ -42,6 +42,7 @@ public interface MarkerRepository extends JpaRepository<Marker, Long> {
                 SELECT m
                 FROM Marker m
                 WHERE
+                    (
                     m.visibility = 1
                     OR (
                         m.visibility = 2
@@ -56,6 +57,7 @@ public interface MarkerRepository extends JpaRepository<Marker, Long> {
                                     (f.receiver.id = :authorId AND f.sender.id = m.author.id)
                                 )
                         )
+                    )
                     )
                     AND NOT m.author.id = :authorId
                 ORDER BY m.createdAt DESC
@@ -105,5 +107,37 @@ public interface MarkerRepository extends JpaRepository<Marker, Long> {
                 ORDER BY m.createdAt DESC
             """)
     List<Marker> findFriendsMarkers(Long userId);
+
+    @Query("""
+                SELECT m
+                FROM Marker m
+                WHERE
+                    (
+                        (
+                            m.visibility = 1
+                            OR (
+                                m.visibility = 2
+                                AND EXISTS (
+                                    SELECT 1
+                                    FROM FriendsRequests f
+                                    WHERE
+                                        f.status = org.pyv.entity.FriendsRequestsStatus.ACCEPTED
+                                        AND (
+                                            (f.sender.id = :userId AND f.receiver.id = m.author.id)
+                                            OR
+                                            (f.receiver.id = :userId AND f.sender.id = m.author.id)
+                                        )
+                                )
+                            )
+                        )
+                        AND m.author.id != :userId
+                    )
+                    AND LOWER(m.title) LIKE LOWER(CONCAT('%', :query, '%'))
+                ORDER BY m.createdAt DESC
+            """)
+    List<Marker> searchVisibleMarkers(
+            Long userId,
+            String query
+    );
 
 }

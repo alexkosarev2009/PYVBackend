@@ -15,4 +15,5 @@ public interface MarkerService {
     MarkerDTO updateMarker(Long id, MarkerDTO dto);
     void deleteMarker(Long id, User user);
     List<MarkerDTO> getAllAvailableMarkers(Long userId);
+    List<MarkerDTO> searchMarkersByTitle(Long userId, String query);
 }

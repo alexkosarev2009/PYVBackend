@@ -1,22 +1,3 @@
-spring:
-  datasource:
-    url: jdbc:h2:mem:testdb
-
-  h2:
-    console:
-      enabled: true
-
-  liquibase:
-    enabled: true
-    change-log: classpath:db.changelog/db.changelog-master.xml
-
-
-  jpa:
-    hibernate:
-      ddl-auto: none
-    generate-ddl: false
-    show-sql: true
-
 s3:
   endpoint: https://storage.yandexcloud.net
   region: ru-central1
@@ -24,3 +5,52 @@ s3:
 
 jwt:
   secret: tk3EASATqPX1mxbMrOsoN4iAnZZl0pVQVeBtzG8t5tg=
+
+spring:
+  profiles:
+    active: local
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db.changelog/db.changelog-master.xml
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    generate-ddl: false
+    show-sql: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/pyv_db
+    username: pyv_user
+    password: pyv_password
+    driver-class-name: org.postgresql.Driver
+
+  h2:
+    console:
+      enabled: false

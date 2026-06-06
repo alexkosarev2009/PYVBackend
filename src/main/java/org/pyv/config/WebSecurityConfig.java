@@ -42,6 +42,8 @@ public class WebSecurityConfig {
             )
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/login").permitAll()
+                    .requestMatchers("/api/auth/refresh").permitAll()
+
                     .requestMatchers("/h2-console/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
 

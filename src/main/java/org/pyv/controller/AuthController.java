@@ -1,7 +1,8 @@
 package org.pyv.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.pyv.dto.AuthResponse;
+import org.pyv.dto.AuthResponseDTO;
+import org.pyv.dto.RefreshTokenDTO;
 import org.pyv.dto.UserLoginDTO;
 import org.pyv.service.JwtService;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class AuthController {
     private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody UserLoginDTO request) {
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody UserLoginDTO request) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -32,8 +33,34 @@ public class AuthController {
 
         UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
 
-        String token = jwtService.generateToken(user);
+        String accessToken = jwtService.generateAccessToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
 
-        return ResponseEntity.ok(new AuthResponse(token));
+        return ResponseEntity.ok(new AuthResponseDTO(accessToken, refreshToken));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponseDTO> refresh(
+            @RequestBody RefreshTokenDTO request
+    ) {
+        String refreshToken = request.getRefreshToken();
+
+        if (!jwtService.isRefreshToken(refreshToken)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        String username = jwtService.extractUsername(refreshToken);
+
+        UserDetails user = userDetailsService.loadUserByUsername(username);
+
+        if (!jwtService.isTokenValid(refreshToken, user)) {
+            return ResponseEntity.status(401).build();
+        }
+
+        String newAccessToken = jwtService.generateAccessToken(user);
+
+        return ResponseEntity.ok(
+                new AuthResponseDTO(newAccessToken, refreshToken)
+        );
     }
 }

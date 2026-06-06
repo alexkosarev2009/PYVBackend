@@ -1,6 +1,7 @@
 package org.pyv.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.pyv.dto.AuthResponseDTO;
 import org.pyv.dto.FriendsRequestsDTO;
 import org.pyv.dto.UserDTO;
 import org.pyv.entity.FriendsRequestsStatus;

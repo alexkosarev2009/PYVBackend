@@ -34,6 +34,8 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
+    volumes:
+      - /root/.aws:/root/.aws:ro
 
 volumes:
   postgres_data:

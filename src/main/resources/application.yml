@@ -4,7 +4,7 @@ s3:
   bucket: pin-your-voice
 
 jwt:
-  secret: tk3EASATqPX1mxbMrOsoN4iAnZZl0pVQVeBtzG8t5tg=
+  secret: ${JWT_SECRET}
 
 spring:
   profiles:
@@ -46,9 +46,9 @@ spring:
       on-profile: docker
 
   datasource:
-    url: jdbc:postgresql://postgres:5432/pyv_db
-    username: pyv_user
-    password: pyv_password
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   h2:

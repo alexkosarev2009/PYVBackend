@@ -1,6 +1,7 @@
 package org.pyv.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.pyv.dto.UpdateUserDTO;
 import org.pyv.dto.UserDTO;
 import org.pyv.dto.UserRegisterDTO;
 import org.pyv.entity.Authority;
@@ -75,7 +76,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO updateUser(Long id, UserDTO dto) {
+    public UserDTO updateUser(Long id, UpdateUserDTO dto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found!"));
         if (userRepository.findByUsername(dto.getUsername()).isPresent()) {

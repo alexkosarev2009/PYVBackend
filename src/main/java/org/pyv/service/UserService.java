@@ -1,5 +1,6 @@
 package org.pyv.service;
 
+import org.pyv.dto.UpdateUserDTO;
 import org.pyv.dto.UserDTO;
 import org.pyv.dto.UserRegisterDTO;
 
@@ -10,6 +11,6 @@ public interface UserService {
     UserDTO getUserById(Long id);
     UserDTO getUserByUsername(String username);
     UserDTO createUser(UserRegisterDTO dto);
-    UserDTO updateUser(Long id, UserDTO dto);
+    UserDTO updateUser(Long id, UpdateUserDTO dto);
     void deleteUser(Long id);
 }

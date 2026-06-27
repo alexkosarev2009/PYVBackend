@@ -1,6 +1,7 @@
 package org.pyv.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.pyv.dto.UpdateUserDTO;
 import org.pyv.dto.UserDTO;
 import org.pyv.dto.UserRegisterDTO;
 import org.pyv.entity.User;
@@ -50,9 +51,10 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDTO));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        return ResponseEntity.ok(userService.updateUser(id, userDTO));
+    @PatchMapping("/update")
+    public ResponseEntity<UserDTO> updateMe(@RequestBody UpdateUserDTO userDTO,
+                                            @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(userService.updateUser(user.getId(), userDTO));
     }
 
     @DeleteMapping("/{id}")
